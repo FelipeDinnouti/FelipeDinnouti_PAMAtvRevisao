@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions, Image  } from 'react-native';
 
 import CustomButton from '../components/CustomButton.js';
-
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -10,6 +9,7 @@ const windowWidth = Dimensions.get('window').width;
 export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
+            <Image source={require('../image_assets/casual_dog.png')} style={styles.image} resizeMode='contain'/>
             <Text style={styles.title}>Ótimo Dia!</Text>
             <Text style={styles.subtitle}>Como deseja acessar?</Text>
             <CustomButton text="Como deseja acessar?" container_style={styles.oauthButtonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Home')} />
@@ -58,4 +58,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '400'
     },
+    image: {
+        padding: 50,
+        width: windowWidth*0.9
+    }
 })
