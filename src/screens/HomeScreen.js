@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.title}>Ótimo Dia!</Text>
             <Text style={styles.subtitle}>Como deseja acessar?</Text>
             <CustomButton text="Como deseja acessar?" container_style={styles.oauthButtonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Home')} />
-            <CustomButton text="Outras Opção" container_style={styles.buttonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Home')} />
+            <CustomButton text="Outras Opção" container_style={styles.buttonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Login')} />
 
         </View>
     );
