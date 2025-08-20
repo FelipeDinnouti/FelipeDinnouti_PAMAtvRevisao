@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 const windowWidth = Dimensions.get('window').width; 
 
-const CustomButton = ({container_style, text_style, onPress, text}) => {
+const CustomButton = ({container_style, icon, icon_style, onPress}) => {
     return (
         <Pressable style={container_style} onPress={onPress}>                
-                <Text style={text_style} >{text}</Text>
+                <Image source={icon} style={icon_style}/>
         </Pressable>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Dimensions, Image  } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions, Image, Pressable  } from 'react-native';
 
 import CustomButton from '../components/CustomButton.js';
 
@@ -12,8 +12,17 @@ export default function HomeScreen({ navigation }) {
             <Image source={require('../image_assets/casual_dog.png')} style={styles.image} resizeMode='contain'/>
             <Text style={styles.title}>Ótimo Dia!</Text>
             <Text style={styles.subtitle}>Como deseja acessar?</Text>
-            <CustomButton text="Como deseja acessar?" container_style={styles.oauthButtonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Home')} />
-            <CustomButton text="Outras Opção" container_style={styles.buttonContainer} text_style={styles.buttonText} onPress={() => navigation.navigate('Login')} />
+            
+            <Pressable style={styles.oauthButtonContainer}>
+                
+                <Image source={require('../image_assets/Google.png')} style={styles.oauthLogo}></Image>
+                
+                <Text style={styles.buttonText} >Como deseja acessar?</Text>
+
+                <Image source={require('../image_assets/Google.png')} style={styles.oauthLogoBlank}></Image>
+            </Pressable>
+
+            <CustomButton text="Outras Opção" container_style={styles.buttonContainer} text_style={styles.otherOptionsButtonText} onPress={() => navigation.navigate('Login')} />
 
         </View>
     );
@@ -40,7 +49,33 @@ const styles = StyleSheet.create({
         width: windowWidth*0.85,
         borderRadius: 5,
         paddingTop: 8,
-        paddingBottom: 8
+        paddingBottom: 8,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+        
+    },
+    oauthLogo: {
+        width: 30,
+        height: 30,
+        backgroundColor: 'white',
+        padding: 5,
+        borderRadius: 4,
+        color: 'white',
+    },
+    oauthLogoBlank: {
+        width: 30,
+        height: 30,
+        opacity: 0.0
+    },
+    buttonText: {
+        width: windowWidth*0.50,
+        marginTop: 8,
+        marginBottom: 8,
+        textAlign: 'center',
+        fontWeight: '400',
+        color: 'white',
     },
     buttonContainer: {
         backgroundColor: '#fff',
@@ -52,14 +87,15 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8
     },
-    buttonText: {
+    otherOptionsButtonText: {
+        color: '#2e3e4b',
+        fontWeight: '500',
         marginTop: 8,
         marginBottom: 8,
         textAlign: 'center',
-        fontWeight: '400'
-    },
+    },  
     image: {
         padding: 50,
         width: windowWidth*0.9
-    }
+    },
 })

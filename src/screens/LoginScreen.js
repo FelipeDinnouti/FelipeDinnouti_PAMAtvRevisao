@@ -1,15 +1,19 @@
 import React from 'react';
 import {useState} from 'react';
 
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { Ionicons } from "@expo/vector-icons"; // Eye icon
 
 import CustomButton from '../components/CustomButton.js';
+import ImageButton from '../components/ImageButton.js';
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
     const [isChecked, setChecked] = useState(false);
+    const [password, setPassword] = useState("");
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     return (
         <View style={styles.root_container}>
@@ -22,9 +26,25 @@ export default function LoginScreen({ navigation }) {
                 <Text style={styles.input_label}>E-mail</Text>
                 <TextInput style={styles.text_input} placeholder="Digite seu E-mail"></TextInput>
                 <Text style={styles.input_label}>Senha</Text>
-                <TextInput style={styles.text_input} placeholder="Digite sua Senha"></TextInput>
+                <TextInput
+                    style={styles.text_input}
+                    placeholder="Digite sua senha"
+                    secureTextEntry={!isPasswordVisible} // hides text when false
+                    value={password}
+                    onChangeText={setPassword}
+                />
+                <Pressable
+                    style={styles.icon}
+                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                    <Ionicons
+                        name={isPasswordVisible ? "eye-off" : "eye"}
+                        size={24}
+                        color="gray"
+                    />
+                </Pressable>
 
-                <View style={styles.login_options}>]
+                <View style={styles.login_options}>
                     <View style={styles.remember_me}>
                         <Checkbox style={styles.checkbox}
                             value={isChecked}
@@ -39,6 +59,17 @@ export default function LoginScreen({ navigation }) {
                 <View style={styles.button_container}>
                     <CustomButton text="Acessar" container_style={styles.login_button} text_style={styles.login_button_text}></CustomButton>
                     <CustomButton text="Cadastro" container_style={styles.register_button} text_style={styles.register_button_text}></CustomButton>
+                </View>
+
+                <View style={styles.window_divider}>
+                    <View style={styles.ruler}></View>
+                    <Text>Ou contine com</Text>
+                    <View style={styles.ruler}></View>
+                </View>
+                
+                <View style={styles.alternative_login_options}>
+                    <ImageButton icon={require('../image_assets/Google.png')} container_style={styles.login_option}/>
+                    <ImageButton icon={require('../image_assets/Facebook.png')} container_style={styles.login_option}/>
                 </View>
             </View>
         </View>
@@ -63,10 +94,15 @@ const styles = StyleSheet.create({
         paddingBottom: 40
     },
     login_options: {
-        flex: 1,
+        marginTop: 30,
+        marginBottom: 30,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: "#ff0000"
+    },
+    checkbox: {
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: "#14c871",
     },
     text_input: {
         backgroundColor: '#e3e7f3',
@@ -81,21 +117,22 @@ const styles = StyleSheet.create({
     remember_me: {
         flex: 1,
         flexDirection: 'row',
-        gap: 10
+        gap: 10,
     },
     input_label: {
         fontWeight: 500,
         fontSize: 12
     },
     title: {
+        color: '#2e3e4b',
         fontSize: 40,
         fontWeight: 500
     },
     subtitle: {
+        color: '#2e3e4b',
         fontWeight: 500
     },
     button_container: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         gap: 10,
@@ -104,20 +141,54 @@ const styles = StyleSheet.create({
     login_button: {
         backgroundColor: '#14c871',
         width: windowWidth*0.40,
-        height: 40,
+        height: 60,
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', //Centered horizontally
         flex:1
     },
+    login_button_text: {
+        color: 'white'
+    },
     register_button: {
         borderWidth: 1,
+        borderColor: '#2e3e4b',
         width: 0.40*windowWidth,
-        height: 40,
+        height: 60,
         borderRadius: 5,
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', //Centered horizontally
         flex:1
+    },
+    register_button_text: {
+        color: '#2e3e4b',
+        fontWeight: '500'
+    },
+    window_divider: {
+        marginTop: 50,
+        marginBottom: 50,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    ruler: {
+        borderBottomColor: "grey",
+        borderBottomWidth: StyleSheet.hairlineWidth, // Device aware 1px
+        marginVertical: 10,
+        flex: 1,
+        marginHorizontal: 10,
+    },
+    alternative_login_options: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 20,
+        width: 0.85*windowWidth,
+        marginBottom: 80
+    },
+    login_option: {
+        padding: 8,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 10
     }
 })
