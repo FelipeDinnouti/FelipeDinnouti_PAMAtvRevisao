@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 
 import { View, Text, StyleSheet, Dimensions, TextInput, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
@@ -18,6 +18,9 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.root_container}>
             <View style={styles.container}>
+                <Pressable  onPress={() => navigation.goBack()}>
+                    <Ionicons name="arrow-back" size={24} color="#14c871" />
+                </Pressable > 
                 <View style={styles.title_container}>
                     <Text style={styles.title}>Acesse</Text>
                     <Text style={styles.subtitle}>com E-mail e senha</Text>
@@ -26,23 +29,25 @@ export default function LoginScreen({ navigation }) {
                 <Text style={styles.input_label}>E-mail</Text>
                 <TextInput style={styles.text_input} placeholder="Digite seu E-mail"></TextInput>
                 <Text style={styles.input_label}>Senha</Text>
-                <TextInput
-                    style={styles.text_input}
-                    placeholder="Digite sua senha"
-                    secureTextEntry={!isPasswordVisible} // hides text when false
-                    value={password}
-                    onChangeText={setPassword}
-                />
-                <Pressable
-                    style={styles.icon}
-                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                >
-                    <Ionicons
-                        name={isPasswordVisible ? "eye-off" : "eye"}
-                        size={24}
-                        color="gray"
+                <View style={styles.password_container}>
+                    <TextInput
+                        style={styles.password_text}
+                        placeholder="Digite sua senha"
+                        secureTextEntry={!isPasswordVisible}
+                        value={password}
+                        onChangeText={setPassword}
                     />
-                </Pressable>
+                    <Pressable
+                        style={styles.password_icon}
+                        onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                    >
+                        <Ionicons
+                            name={isPasswordVisible ? "eye-off" : "eye"}
+                            size={22}
+                            color="gray"
+                        />
+                    </Pressable>
+                </View>
 
                 <View style={styles.login_options}>
                     <View style={styles.remember_me}>
@@ -66,10 +71,10 @@ export default function LoginScreen({ navigation }) {
                     <Text>Ou contine com</Text>
                     <View style={styles.ruler}></View>
                 </View>
-                
+
                 <View style={styles.alternative_login_options}>
-                    <ImageButton icon={require('../image_assets/Google.png')} container_style={styles.login_option}/>
-                    <ImageButton icon={require('../image_assets/Facebook.png')} container_style={styles.login_option}/>
+                    <ImageButton icon={require('../image_assets/Google.png')} container_style={styles.login_option} />
+                    <ImageButton icon={require('../image_assets/Facebook.png')} container_style={styles.login_option} />
                 </View>
             </View>
         </View>
@@ -84,11 +89,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f8ff',
     },
     container: {
-        marginTop: 80 ,
+        marginTop: 80,
         flexDirection: 'column',
-//        justifyContent: 'left',
+        //        justifyContent: 'left',
         alignItems: 'left',
-        backgroundColor: '#f0f8ff',    
+        backgroundColor: '#f0f8ff',
     },
     title_container: {
         paddingBottom: 40
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     },
     text_input: {
         backgroundColor: '#e3e7f3',
-        width: windowWidth*0.85,
+        width: windowWidth * 0.85,
         height: 65,
         borderRadius: 5,
         marginBottom: 15,
@@ -114,6 +119,26 @@ const styles = StyleSheet.create({
 
         fontWeight: 500,
     },
+    password_container: {
+        backgroundColor: '#e3e7f3',
+        width: windowWidth * 0.85,
+        height: 65,
+        borderRadius: 5,
+        marginBottom: 15,
+        padding: 10,
+
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 10,
+    },
+    password_text: {
+        flex: 1, // takes all available space
+        paddingVertical: 10,
+    },
+    password_icon: {
+        padding: 6,
+    },
+
     remember_me: {
         flex: 1,
         flexDirection: 'row',
@@ -136,17 +161,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         gap: 10,
-        width: 0.85*windowWidth,
+        width: 0.85 * windowWidth,
     },
     login_button: {
         backgroundColor: '#14c871',
-        width: windowWidth*0.40,
+        width: windowWidth * 0.40,
         height: 60,
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', //Centered horizontally
-        flex:1
+        flex: 1
     },
     login_button_text: {
         color: 'white'
@@ -154,20 +179,20 @@ const styles = StyleSheet.create({
     register_button: {
         borderWidth: 1,
         borderColor: '#2e3e4b',
-        width: 0.40*windowWidth,
+        width: 0.40 * windowWidth,
         height: 60,
         borderRadius: 5,
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', //Centered horizontally
-        flex:1
+        flex: 1
     },
     register_button_text: {
         color: '#2e3e4b',
         fontWeight: '500'
     },
     window_divider: {
-        marginTop: 50,
-        marginBottom: 50,
+        marginTop: 20,
+        marginBottom: 20,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center'
@@ -183,7 +208,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         gap: 20,
-        width: 0.85*windowWidth,
+        width: 0.85 * windowWidth,
         marginBottom: 80
     },
     login_option: {
